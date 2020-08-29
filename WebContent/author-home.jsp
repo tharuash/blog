@@ -315,6 +315,8 @@
 			$('#blog_id').val(e.relatedTarget.id)
 		})
 	</script>
+	
+	<script src="js/sb-main.js"></script>
 
 </body>
 

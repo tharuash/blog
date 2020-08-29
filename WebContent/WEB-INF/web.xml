@@ -75,6 +75,46 @@
   	<servlet-class>com.blog.servlets.SearchBlogServlet</servlet-class>
   </servlet>
   
+  <servlet>
+  	<servlet-name>RegisterServlet</servlet-name>
+  	<servlet-class>com.blog.servlets.RegisterServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+  	<servlet-name>SettingsServlet</servlet-name>
+  	<servlet-class>com.blog.servlets.SettingsServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+  	<servlet-name>GetSettingsServlet</servlet-name>
+  	<servlet-class>com.blog.servlets.GetSettingsServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+  	<servlet-name>AdminHomeServlet</servlet-name>
+  	<servlet-class>com.blog.servlets.AdminHomeServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>AdminHomeServlet</servlet-name>
+  	<url-pattern>/admin_home</url-pattern>
+  </servlet-mapping>
+  
+   <servlet-mapping>
+  	<servlet-name>GetSettingsServlet</servlet-name>
+  	<url-pattern>/web_settings</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+  	<servlet-name>SettingsServlet</servlet-name>
+  	<url-pattern>/settings</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+  	<servlet-name>RegisterServlet</servlet-name>
+  	<url-pattern>/register</url-pattern>
+  </servlet-mapping>
+  
   <servlet-mapping>
   	<servlet-name>SearchBlogServlet</servlet-name>
   	<url-pattern>/search</url-pattern>

@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.blog.entity.User;
+import com.blog.services.dto.LoginDto;
 import com.blog.utils.DbUtil;
 
 public class UserService {
@@ -97,5 +98,76 @@ public class UserService {
 
 		return user;
 		
+	}
+	
+	public LoginDto createUser(User user) {
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		LoginDto loginDto = new LoginDto();
+		
+		try {
+			connection = DbUtil.getConnection();
+			String sql = "SELECT 1 FROM users u WHERE u.email = ?";
+
+			pstmt = connection.prepareStatement(sql,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			pstmt.setString(1, user.getEmail());
+			
+			rs = pstmt.executeQuery();
+			
+			
+			if(rs.next() && rs.getInt(1) > 0) {
+				loginDto.setAuthorized(false);
+				loginDto.setError("Given email is already registered");
+				
+				rs.close();
+				pstmt.close();
+				
+			} else {
+				
+				rs.close();
+				pstmt.close();
+				
+				String sql1 = "INSERT INTO users( firstname, lastname, email, password, mobile, role) VALUES (?,?,?,?,?,?) RETURNING id";
+				pstmt = connection.prepareStatement(sql1,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+				pstmt.setString(1, user.getFirstname());
+				pstmt.setString(2, user.getLastname());
+				pstmt.setString(3, user.getEmail());
+				pstmt.setString(4, user.getPassword());
+				pstmt.setString(5, user.getMobile());
+				pstmt.setString(6, "author");
+				
+				rs = pstmt.executeQuery();
+				rs.next();
+				
+				if( rs.getLong(1) > 0) {
+					User signedUser = new User();
+					signedUser.setUserId(rs.getLong(1));
+					
+					loginDto.setUser(signedUser);
+					loginDto.setAuthorized(true);
+					
+				}else {
+					loginDto.setAuthorized(false);
+					loginDto.setError("Error in creating user. Please retry");
+					
+				}
+			}
+			
+		} catch (Exception e) {
+			System.out.println("Error: " + e);
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		return loginDto;
+
 	}
 }

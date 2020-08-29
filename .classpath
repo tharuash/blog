@@ -16,5 +16,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/postgresql"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jstl"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/taglibs"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/gson"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

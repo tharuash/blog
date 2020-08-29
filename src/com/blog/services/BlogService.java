@@ -78,7 +78,7 @@ public class BlogService {
 		ResultSet rs = null;
 		try {
 			connection = DbUtil.getConnection();
-			String sql = "SELECT u.id, u.firstname, u.lastname, b.id, b.title, b.description, b.created_date, b.created_time, b.admin_feedback FROM blogs b INNER JOIN users u ON b.user_id = u.id WHERE b.id =?";
+			String sql = "SELECT u.id, u.firstname, u.lastname, b.id, b.title, b.description, b.created_date, b.created_time, b.admin_feedback, b.visibility FROM blogs b INNER JOIN users u ON b.user_id = u.id WHERE b.id =?";
 			pstmt = connection.prepareStatement(sql);
 			pstmt.setLong(1, id);
 
@@ -93,7 +93,9 @@ public class BlogService {
 			blog.setDescription(rs.getString(6));
 			blog.setCreatedDate(rs.getDate(7).toLocalDate());
 			blog.setCreatedTime(rs.getTime(8).toLocalTime());
+			
 			blog.setAdminFeedback(rs.getString(9));
+			blog.setVisibility(rs.getBoolean(10));
 			blog.setUser(user);
 
 			pstmt.close();
@@ -189,7 +191,7 @@ public class BlogService {
 			pstmt.setString(3, blog.getDescription());
 			pstmt.setDate(4, Date.valueOf(LocalDate.now()));
 			pstmt.setTime(5, Time.valueOf(LocalTime.now()));
-			pstmt.setBoolean(6, false);
+			pstmt.setBoolean(6, true);
 
 			rs = pstmt.executeQuery();
 			rs.next();

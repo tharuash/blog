@@ -62,7 +62,7 @@
 			<!-- Sidebar - Brand -->
 			<a
 				class="sidebar-brand d-flex align-items-center justify-content-center"
-				href="#">
+				href="${pageContext.request.contextPath}/admin_home">
 				<div class="sidebar-brand-icon rotate-n-15">
 					<i class="fas fa-laugh-wink"></i>
 				</div>
@@ -75,7 +75,7 @@
 			<hr class="sidebar-divider my-0">
 
 			<li class="nav-item active"><a class="nav-link"
-				href="${pageContext.request.contextPath}/author_blogs"> <i
+				href="${pageContext.request.contextPath}/web_settings"> <i
 					class="fas fa-fw fa-tachometer-alt"></i> <span>Web Settings</span></a></li>
 
 
@@ -328,7 +328,7 @@
 			$('#blog_id').val(e.relatedTarget.id)
 		})
 	</script>
-
+	<script src="js/sb-main.js"></script>
 </body>
 
 </html>

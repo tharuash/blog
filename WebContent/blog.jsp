@@ -94,12 +94,15 @@
 							role="navigation">
 							<ul class="site-menu main-menu js-clone-nav ml-auto ">
 
-								<li class="active"><a href="${pageContext.request.contextPath}/" class="nav-link">Blog</a></li>
+								<li class="active"><a href="${pageContext.request.contextPath}/" class="nav-link">Home</a></li>
 								
 								<% if(!authenticated) { %>
 								
 									<li><a href="${pageContext.request.contextPath}/login"
 										class="nav-link">Sign In</a></li>
+									
+									<li><a href="${pageContext.request.contextPath}/register"
+										class="nav-link">Sign Up</a></li>
 								<% } %>
 
 							</ul>
@@ -168,6 +171,7 @@
 
 							</ul>
 							<!-- END comment-list -->
+							<%= visibility %>
 							<% if(!visibility) { %>
 							<h2 style="color: red">This post is not publically available.</h2>
 							<div class="comment-form-wrap pt-5">
@@ -302,7 +306,7 @@
 	<script src="/blog/js/aos.js"></script>
 
 	<script src="/blog/js/main.js"></script>
-
+	<script src="js/sb-main.js"></script>
 </body>
 
 </html>

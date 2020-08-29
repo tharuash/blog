@@ -9,7 +9,7 @@
 <html lang="en">
 
 <head>
-<title>Trips &mdash; Website Template by Colorlib</title>
+<title>Blog</title>
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -79,9 +79,9 @@
 									href="${pageContext.request.contextPath}/" class="nav-link">Home</a></li>
 								<li><a href="${pageContext.request.contextPath}/login"
 									class="nav-link">Sign In</a></li>
-								<!--li><a href="trips.html" class="nav-link">Trips</a></li>
-                  <li class="active"><a href="blog.html" class="nav-link">Blog</a></li>
-                  <li><a href="contact.html" class="nav-link">Contact</a></li-->
+								<li><a href="${pageContext.request.contextPath}/register"
+									class="nav-link">Sign Up</a></li>
+								
 							</ul>
 						</nav>
 					</div>

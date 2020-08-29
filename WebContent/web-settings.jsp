@@ -4,10 +4,10 @@
 <%@ page import="java.util.List"%>
 <%@ page import="javax.servlet.http.Cookie"%>
 <%@ page import="com.blog.entity.Blog"%>
-<%@ page import="com.blog.entity.Report" %>
+<%@ page import="com.blog.entity.Report"%>
 <!doctype html>
 <%
-	Blog blog = (Blog)request.getAttribute("blog");
+	Blog blog = (Blog) request.getAttribute("blog");
 %>
 <%
 	Cookie[] cks = request.getCookies();
@@ -74,9 +74,7 @@
 
 			<!-- Divider -->
 			<hr class="sidebar-divider my-0">
-			
-			
-					
+
 			<li class="nav-item active"><a class="nav-link"
 				href="${pageContext.request.contextPath}/web_settings"> <i
 					class="fas fa-fw fa-tachometer-alt"></i> <span>Web Settings</span></a></li>
@@ -152,7 +150,7 @@
 					<!-- Page Heading -->
 					<div
 						class="d-sm-flex align-items-center justify-content-between mb-4">
-						<h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+						<h1 class="h3 mb-0 text-gray-800">Web Settings</h1>
 
 					</div>
 
@@ -163,79 +161,51 @@
 					<!-- Content Row -->
 					<div class="row">
 
+						<div class="col-lg-8 mb-4 mx-auto">
+							<div class="card shadow mb-4">
 
-						<div class="card shadow mb-4 mx-auto">
-							<div class="card-header py-3">
-								<h3
-										class="m-0 font-weight-bold text-primary"><%= blog.getTitle() %></h3>
-							</div>
-							<div class="card-body">
-								<div class="text-center">
-									<img class="img-fluid px-3 px-sm-4 mt-3 mb-4"
-										style="width: 15rem;" src="images/img_1.jpg" alt="">
-								</div>
-								<p><%= blog.getDescription() %></p>
-								
-								<br><br>
-								
-								<span>Author : <%= blog.getUser().getFirstname() + " "  + blog.getUser().getLastname()%></span>
-								
-								<br><br>
-								
-								<h5 style="color: black">Reports</h5>
-								<%@ page import="java.util.List"%>
-								<%@ page import="com.blog.entity.Report"%>
-									<%@ page import="com.blog.entity.User"%>
-								<% List<Report> reports = (List)blog.getReports(); %>
-								
-								<ul>
-								<c:forEach items="${blog.getReports()}" var="report">
-									<li style=" margin: 0, 0, 30px, 0; float: left; width:100%; clear: both; list-style: none;">
-										<div>
-											 <h6 >by <span style="font-weight: bold;">${report.user.firstname} ${report.user.lastname}</span></h6> 
-											<!-- div class="meta">${comment.createdDate } at
-												${comment.createdTime}</div -->
-											<p style="color: red;">${report.description}</p>
-											
+								<div class="card-body">
+
+
+
+									<form action="${pageContext.request.contextPath}/settings"
+										method="post" class="mt-3">
+
+
+
+										<div class="form-group row">
+											<div class="col-md-12">
+												<input type="text" class="form-control"
+													placeholder="Hex Code of Color" name="color"
+													required="required" />
+											</div>
 										</div>
-									</li>
-								</c:forEach>
 
-							</ul>
-							
-							<br><br><br>
-								<div style="margin-top:20px;">
+										<div class="form-group row">
+											<div class="col-md-12">
+												<input type="text" class="form-control"
+													placeholder="Web Page Title" name="title"
+													required="required" />
+											</div>
+										</div>
+
+										<div class="form-group row">
+											<div class="col-md-6 mx-auto">
+												<input type="submit"
+													class="btn btn-block btn-primary text-white py-3 px-5"
+													value="Change">
+											</div>
+										</div>
+									</form>
+
+
+
+
+
+
 								</div>
-								<h5 style="color: black">Admin Feedback</h5>
-								
-								<form action="${pageContext.request.contextPath}/admin_blog"
-						method="post" class="mt-3">
-
-						<input type="hidden" value="<%= blog.getBlogId() %>" name="blog_id">
-						
-						<div class="form-group row">
-							<div class="col-md-12">
-								<textarea class="form-control" placeholder="Content"
-									name="feedback" required="required" rows="5">Admin thoughts</textarea>
-							</div>
-						</div>
-
-						<div class="form-group row">
-							<div class="col-md-6 mx-auto">
-								<input type="submit"
-									class="btn btn-block btn-danger text-white py-3 px-5"
-									value="Remove Publicaly">
-							</div>
-						</div>
-					</form>
-								
-								
-								
-								
-								
 
 							</div>
-							
 						</div>
 					</div>
 
