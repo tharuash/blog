@@ -64,7 +64,7 @@
               <nav class="site-navigation text-right ml-auto d-none d-lg-block" role="navigation">
                 <ul class="site-menu main-menu js-clone-nav ml-auto ">
                   
-                  <li><a href="" class="nav-link">Blog</a></li>
+                  <li><a  href="${pageContext.request.contextPath}/" class="nav-link">Blog</a></li>
                   <li><a href="#" class="nav-link">Sign In</a></li>
                 </ul>
               </nav>

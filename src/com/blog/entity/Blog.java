@@ -14,6 +14,8 @@ public class Blog {
 	private LocalTime createdTime;
 	private boolean visibility;
 	private List<Comment> comments;
+	private List<Report> reports;
+	private String adminFeedback;
 	
 	public Blog() {
 		
@@ -94,6 +96,22 @@ public class Blog {
 	
 	public List<Comment> getComments() {
 		return comments;
+	}
+	
+	public void setReports(List<Report> reports) {
+		this.reports = reports;
+	}
+	
+	public List<Report> getReports() {
+		return reports;
+	}
+	
+	public void setAdminFeedback(String adminFeedback) {
+		this.adminFeedback = adminFeedback;
+	}
+	
+	public String getAdminFeedback() {
+		return adminFeedback;
 	}
 
 }

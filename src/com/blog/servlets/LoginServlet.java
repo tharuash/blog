@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.blog.entity.Blog;
 import com.blog.services.AuthService;
 import com.blog.services.BlogService;
+import com.blog.services.ReportService;
 import com.blog.services.dto.LoginDto;
 
 public class LoginServlet extends HttpServlet {
@@ -24,10 +25,12 @@ public class LoginServlet extends HttpServlet {
 	private RequestDispatcher dispatcher;
 	private AuthService authService;
 	private BlogService blogService;
+	private ReportService reportService;
 
 	public LoginServlet() {
 		this.authService = new AuthService();
 		this.blogService = new BlogService();
+		this.reportService = new ReportService();
 	}
 
 	@Override
@@ -42,11 +45,22 @@ public class LoginServlet extends HttpServlet {
 		req.setAttribute("auth", loginDto);
 		
 		if(loginDto.isAuthorized()) {
-			List<Blog> userBlogs = blogService.getUserBlogs(loginDto.getUser().getUserId());
-			req.setAttribute("blogs", userBlogs);
+			
 			Cookie ck = new Cookie("id", String.valueOf(loginDto.getUser().getUserId()));
 			resp.addCookie(ck);
-			dispatcher = req.getRequestDispatcher("/author-home.jsp");
+			
+			if(loginDto.getUser().getRole().equals("admin")) {
+				req.setAttribute("summaries", reportService.getAdminReportedBlogs());
+				dispatcher = req.getRequestDispatcher("/admin-home.jsp");
+			}else {
+				List<Blog> blogs = blogService.getAllBlogs();
+				req.setAttribute("blogs", blogs);
+				dispatcher = req.getRequestDispatcher("/author-home.jsp");
+			}
+			
+			
+			
+			
 		}
 		
 		dispatcher.forward(req, resp);

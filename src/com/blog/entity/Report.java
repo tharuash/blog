@@ -11,6 +11,8 @@ public class Report {
 	private User user;
 	private LocalDate createdDate;
 	private LocalTime createdTime;
+	private String action;
+	private boolean closed;
 
 	public long getReportId() {
 		return reportId;
@@ -58,6 +60,22 @@ public class Report {
 
 	public void setCreatedTime(LocalTime createdTime) {
 		this.createdTime = createdTime;
+	}
+	
+	public String getAction() {
+		return action;
+	}
+	
+	public void setAction(String action) {
+		this.action = action;
+	}
+	
+	public boolean isClosed() {
+		return closed;
+	}
+	
+	public void setClosed(boolean closed) {
+		this.closed = closed;
 	}
 
 }

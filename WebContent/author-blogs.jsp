@@ -2,26 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="java.util.List"%>
-<%@ page import="javax.servlet.http.Cookie"%>
 <!doctype html>
 <%
 	List blogs = (List) request.getAttribute("blogs");
-%>
-<%
-	Cookie[] cks = request.getCookies();
-	long id = 0L;
-	boolean authenticated = false;
-	if (cks != null) {
-		for (int i = 0; i < cks.length; i++) {
-			String name = cks[i].getName();
-			String value = cks[i].getValue();
-			if (name.equals("id") && Long.parseLong(value) != 0) {
-				id = Long.parseLong(value);
-				authenticated = true;
-				break; // exit the loop and continue the page
-			}
-		}
-	}
 %>
 <html lang="en">
 
@@ -72,13 +55,13 @@
 
 			<!-- Divider -->
 			<hr class="sidebar-divider my-0">
-
-			<li class="nav-item active"><a class="nav-link"
+			
+			<li class="nav-item"><a class="nav-link"
 				href="${pageContext.request.contextPath}/author_blogs"> <i
 					class="fas fa-fw fa-tachometer-alt"></i> <span>My blogs</span></a></li>
 
 			<!-- Nav Item - Dashboard -->
-			<li class="nav-item active"><a class="nav-link"
+			<li class="nav-item"><a class="nav-link"
 				href="${pageContext.request.contextPath}/blog_create"> <i
 					class="fas fa-fw fa-tachometer-alt"></i> <span>Add blogs</span></a></li>
 
@@ -170,13 +153,12 @@
 							<div class="col-lg-6 mb-4">
 
 								<!-- Illustrations -->
+								
 								<div class="card shadow mb-4">
-									<div class="card-header py-3">
-										<a
-											href="${pageContext.request.contextPath}/view?id=${blog.blogId}"><h6
-												class="m-0 font-weight-bold text-primary">${blog.title}</h6></a>
+									<div class="card-header py-3" style="color: <c:if test="${blog.visibility = false}">red</c:if>">
+										<a href="${pageContext.request.contextPath}/view?id=${blog.blogId}"><h6 class="m-0 font-weight-bold text-primary">${blog.title}</h6></a>
 									</div>
-									<div class="card-body" style="height: 512px; overflow: hidden">
+									<div class="card-body" style="height: 500px; overflow: hidden">
 										<div class="text-center">
 											<img class="img-fluid px-3 px-sm-4 mt-3 mb-4"
 												style="width: 15rem;" src="images/img_1.jpg" alt="">
@@ -186,9 +168,10 @@
 									</div>
 									<div class="card-footer"
 										style="padding: 10px; float: right; text-align: right">
-										<a href="#" data-toggle="modal" id="${blog.blogId}"
-											data-target="#reportModal"><button
-												class="btn btn-danger btn-sm">Report</button></a>
+										<a href="${pageContext.request.contextPath}/update_blog?id=${blog.blogId}"><button
+												class="btn btn-warning btn-sm">Update</button></a>
+										<a href="${pageContext.request.contextPath}/blog_delete?id=${blog.blogId}" class="pl-4"><button
+												class="btn btn-danger btn-sm">Delete</button></a>
 									</div>
 								</div>
 
@@ -242,53 +225,8 @@
 				<div class="modal-footer">
 					<button class="btn btn-secondary" type="button"
 						data-dismiss="modal">Cancel</button>
-					<a class="btn btn-primary"
-						href="${pageContext.request.contextPath}/logout">Logout</a>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="modal fade" id="reportModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Anything not
-						according rules?</h5>
-					<button class="close" type="button" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">×</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<form action="${pageContext.request.contextPath}/report"
-						method="post">
-
-						<input type="hidden" value="<%= id %>" name="user_id">
-						<input type="hidden" value="0" name="blog_id" id="blog_id">
-						
-						<div class="form-group row">
-							<div class="col-md-12">
-								<textarea class="form-control" placeholder="Content"
-									name="content" required="required" rows="5">Your thoughts</textarea>
-							</div>
-						</div>
-
-						<div class="form-group row">
-							<div class="col-md-6 mx-auto">
-								<input type="submit"
-									class="btn btn-block btn-danger text-white py-3 px-5"
-									value="Report">
-							</div>
-						</div>
-					</form>
-				</div>
-				<!-- div class="modal-footer">
-					<button class="btn btn-secondary" type="button"
-						data-dismiss="modal">Cancel</button>
 					<a class="btn btn-primary" href="${pageContext.request.contextPath}/logout">Logout</a>
-				</div -->
+				</div>
 			</div>
 		</div>
 	</div>
@@ -309,12 +247,6 @@
 	<!-- Page level custom scripts -->
 	<script src="js/demo/chart-area-demo.js"></script>
 	<script src="js/demo/chart-pie-demo.js"></script>
-	<script type="text/javascript">
-		$('#reportModal').on('show.bs.modal', function(e) {
-			console.log(e.relatedTarget.id);
-			$('#blog_id').val(e.relatedTarget.id)
-		})
-	</script>
 
 </body>
 

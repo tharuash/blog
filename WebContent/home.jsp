@@ -75,8 +75,10 @@
 						<nav class="site-navigation text-right ml-auto d-none d-lg-block"
 							role="navigation">
 							<ul class="site-menu main-menu js-clone-nav ml-auto ">
-								<li class="active"><a href="index.html" class="nav-link">Home</a></li>
-								<li><a href="${pageContext.request.contextPath}/login" class="nav-link">Sign In</a></li>
+								<li class="active"><a
+									href="${pageContext.request.contextPath}/" class="nav-link">Home</a></li>
+								<li><a href="${pageContext.request.contextPath}/login"
+									class="nav-link">Sign In</a></li>
 								<!--li><a href="trips.html" class="nav-link">Trips</a></li>
                   <li class="active"><a href="blog.html" class="nav-link">Blog</a></li>
                   <li><a href="contact.html" class="nav-link">Contact</a></li-->
@@ -110,28 +112,53 @@
 
 
 		<div class="site-section">
+
 			<div class="container">
-				
+
+				<div class="row">
+
+					<div class="mx-auto">
+						
+						<form class="form-inline"
+							action="${pageContext.request.contextPath}/search" method="post">
+
+
+							<div class="form-group mx-sm-3 mb-2">
+
+								<input name="query" class="form-control" required="required" />
+							</div>
+							<div class="form-group">
+								<input type="submit" value="Search"
+									class="btn btn-primary btn-lg text-white">
+							</div>
+
+						</form>
+					</div>
+				</div>
+
 				<div class="row">
 					<c:forEach items="${blogs}" var="blog">
 						<div class="col-lg-4 col-md-6 mb-4">
 							<div class="post-entry-1 h-100">
-								<a href="${pageContext.request.contextPath}/view?id=${blog.blogId}"> <img src="images/img_1.jpg"
-									alt="Image" class="img-fluid">
+								<a
+									href="${pageContext.request.contextPath}/view?id=${blog.blogId}">
+									<img src="images/img_1.jpg" alt="Image" class="img-fluid">
 								</a>
-								<div class="post-entry-1-contents" style="height: 250px; overflow: hidden">
+								<div class="post-entry-1-contents"
+									style="height: 250px; overflow: hidden">
 
 									<h2>
 										<a href="single.html">${blog.title}</a>
 									</h2>
-									<span class="meta d-inline-block mb-3">${blog.createdDate} <span
-										class="mx-2">by</span> <a href="#">${blog.user.firstname}</a></span>
+									<span class="meta d-inline-block mb-3">${blog.createdDate}
+										<span class="mx-2">by</span> <a href="#">${blog.user.firstname}</a>
+									</span>
 									<p>${blog.description}</p>
 								</div>
 							</div>
 						</div>
 					</c:forEach>
-					
+
 				</div>
 
 

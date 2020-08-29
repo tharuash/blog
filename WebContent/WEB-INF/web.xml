@@ -20,6 +20,116 @@
   	<servlet-class>com.blog.servlets.LoginServlet</servlet-class>
   </servlet>
   
+   <servlet>
+  	<servlet-name>CreateBlogServlet</servlet-name>
+  	<servlet-class>com.blog.servlets.CreateBlogServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+  	<servlet-name>DeleteBlogServlet</servlet-name>
+  	<servlet-class>com.blog.servlets.DeleteBlogServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+  	<servlet-name>LogoutServlet</servlet-name>
+  	<servlet-class>com.blog.servlets.LogoutServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+  	<servlet-name>AddCommentServlet</servlet-name>
+  	<servlet-class>com.blog.servlets.AddCommentServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+  	<servlet-name>AuthBlogViewServlet</servlet-name>
+  	<servlet-class>com.blog.servlets.AuthBlogViewServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+  	<servlet-name>AuthorBlogsViewServlet</servlet-name>
+  	<servlet-class>com.blog.servlets.AuthorBlogsViewServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+  	<servlet-name>AddReportServlet</servlet-name>
+  	<servlet-class>com.blog.servlets.AddReportServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+  	<servlet-name>UpdateAuthorServlet</servlet-name>
+  	<servlet-class>com.blog.servlets.UpdateAuthorServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+  	<servlet-name>UpdateBlogServlet</servlet-name>
+  	<servlet-class>com.blog.servlets.UpdateBlogServlet</servlet-class>
+  </servlet>
+  
+   <servlet>
+  	<servlet-name>AdminBlogReportServlet</servlet-name>
+  	<servlet-class>com.blog.servlets.AdminBlogReportServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+  	<servlet-name>SearchBlogServlet</servlet-name>
+  	<servlet-class>com.blog.servlets.SearchBlogServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>SearchBlogServlet</servlet-name>
+  	<url-pattern>/search</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+  	<servlet-name>AdminBlogReportServlet</servlet-name>
+  	<url-pattern>/admin_blog</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+  	<servlet-name>UpdateBlogServlet</servlet-name>
+  	<url-pattern>/update_blog</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+  	<servlet-name>UpdateAuthorServlet</servlet-name>
+  	<url-pattern>/update_author</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+  	<servlet-name>AddReportServlet</servlet-name>
+  	<url-pattern>/report</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+  	<servlet-name>AuthorBlogsViewServlet</servlet-name>
+  	<url-pattern>/author_blogs</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+  	<servlet-name>AuthBlogViewServlet</servlet-name>
+  	<url-pattern>/auth_blogs</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+  	<servlet-name>AddCommentServlet</servlet-name>
+  	<url-pattern>/comment</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+  	<servlet-name>LogoutServlet</servlet-name>
+  	<url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+  	<servlet-name>DeleteBlogServlet</servlet-name>
+  	<url-pattern>/blog_delete</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+  	<servlet-name>CreateBlogServlet</servlet-name>
+  	<url-pattern>/blog_create</url-pattern>
+  </servlet-mapping>
+  
   <servlet-mapping>
   	<servlet-name>ViewBlogServlet</servlet-name>
   	<url-pattern>/view</url-pattern>

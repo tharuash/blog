@@ -9,12 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.blog.entity.Blog;
-import com.blog.entity.Comment;
+import com.blog.entity.Report;
 import com.blog.entity.User;
 import com.blog.services.BlogService;
-import com.blog.services.CommentService;
+import com.blog.services.ReportService;
 
-public class AddCommentServlet extends HttpServlet {
+public class AddReportServlet extends HttpServlet {
 	
 	/**
 	 * 
@@ -22,33 +22,31 @@ public class AddCommentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private RequestDispatcher dispatcher;
 	private BlogService blogService;
-	private CommentService commentService;
+	private ReportService reportService;
 	
-	public AddCommentServlet() {
+	public AddReportServlet() {
 		blogService = new BlogService();
-		commentService = new CommentService();
+		reportService = new ReportService();
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		User commentingUser = new User();
-		commentingUser.setUserId(Long.parseLong(req.getParameter("userId")));
+		commentingUser.setUserId(Long.parseLong(req.getParameter("user_id")));
 		Blog currentBlog = new Blog();
-		currentBlog.setBlogId(Long.parseLong(req.getParameter("blogId")));
-		Comment comment = new Comment();
-		comment.setContent(req.getParameter("content"));
-		comment.setUser(commentingUser);
-		comment.setBlog(currentBlog);
+		currentBlog.setBlogId(Long.parseLong(req.getParameter("blog_id")));
+		Report report = new Report();
+		report.setDescription(req.getParameter("content"));
+		report.setUser(commentingUser);
+		report.setBlog(currentBlog);
 		
-		if( commentService.addComment(comment) == 0) {
-			req.setAttribute("error", "Commenting Failed. Please retry");
+		if( reportService.addReport(report) == 0) {
+			req.setAttribute("error", "Reporting Failed. Please retry");
 		}
 		
-		req.setAttribute("blog", blogService.getBlog(currentBlog.getBlogId()));
-		dispatcher = req.getRequestDispatcher("/blog.jsp");
+		req.setAttribute("blogs", blogService.getAllBlogs());
+		dispatcher = req.getRequestDispatcher("/author-home.jsp");
 		dispatcher.forward(req, resp);
 	}
-	
-	
-	
+
 }

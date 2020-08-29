@@ -3,9 +3,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="java.util.List"%>
 <%@ page import="javax.servlet.http.Cookie"%>
+<%@ page import="com.blog.services.dto.AdminReportsDto" %>
 <!doctype html>
 <%
-	List blogs = (List) request.getAttribute("blogs");
+	List<AdminReportsDto> summaries = (List)request.getAttribute("summaries");
 %>
 <%
 	Cookie[] cks = request.getCookies();
@@ -61,12 +62,12 @@
 			<!-- Sidebar - Brand -->
 			<a
 				class="sidebar-brand d-flex align-items-center justify-content-center"
-				href="${pageContext.request.contextPath}/auth_blogs">
+				href="#">
 				<div class="sidebar-brand-icon rotate-n-15">
 					<i class="fas fa-laugh-wink"></i>
 				</div>
 				<div class="sidebar-brand-text mx-3">
-					Blogs <sup></sup>
+					Admin <sup></sup>
 				</div>
 			</a>
 
@@ -75,12 +76,9 @@
 
 			<li class="nav-item active"><a class="nav-link"
 				href="${pageContext.request.contextPath}/author_blogs"> <i
-					class="fas fa-fw fa-tachometer-alt"></i> <span>My blogs</span></a></li>
+					class="fas fa-fw fa-tachometer-alt"></i> <span>Web Settings</span></a></li>
 
-			<!-- Nav Item - Dashboard -->
-			<li class="nav-item active"><a class="nav-link"
-				href="${pageContext.request.contextPath}/blog_create"> <i
-					class="fas fa-fw fa-tachometer-alt"></i> <span>Add blogs</span></a></li>
+
 
 
 			<!-- Divider -->
@@ -132,10 +130,7 @@
 							<div
 								class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
 								aria-labelledby="userDropdown">
-								<a class="dropdown-item" href="${pageContext.request.contextPath}/update_author"> <i
-									class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> Profile
-								</a>
-								<div class="dropdown-divider"></div>
+
 								<a class="dropdown-item" href="#" data-toggle="modal"
 									data-target="#logoutModal"> <i
 									class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -166,36 +161,54 @@
 					<div class="row">
 
 
-						<c:forEach items="${blogs}" var="blog">
-							<div class="col-lg-6 mb-4">
-
-								<!-- Illustrations -->
-								<div class="card shadow mb-4">
-									<div class="card-header py-3">
-										<a
-											href="${pageContext.request.contextPath}/view?id=${blog.blogId}"><h6
-												class="m-0 font-weight-bold text-primary">${blog.title}</h6></a>
-									</div>
-									<div class="card-body" style="height: 512px; overflow: hidden">
-										<div class="text-center">
-											<img class="img-fluid px-3 px-sm-4 mt-3 mb-4"
-												style="width: 15rem;" src="images/img_1.jpg" alt="">
-										</div>
-										<p>${blog.description}</p>
-
-									</div>
-									<div class="card-footer"
-										style="padding: 10px; float: right; text-align: right">
-										<a href="#" data-toggle="modal" id="${blog.blogId}"
-											data-target="#reportModal"><button
-												class="btn btn-danger btn-sm">Report</button></a>
-									</div>
-								</div>
-
-
-
+						<div class="card shadow mb-4 mx-auto">
+							<div class="card-header py-3">
+								<h6 class="m-0 font-weight-bold text-primary">Most Reported Blogs</h6>
 							</div>
-						</c:forEach>
+							<div class="card-body">
+								<div class="table-responsive">
+									<table class="table table-bordered" id="dataTable" width="100%"
+										cellspacing="0">
+										<thead>
+											<tr>
+												<th>Blog Id</th>
+												<th>Title</th>
+												<th>Owner Name</th>
+												<th>Owner Mobile</th>
+												<th>No of Reports</th>
+												<th>Actions</th>
+											</tr>
+										</thead>
+										<tfoot>
+											<tr>
+												<th>Blog Id</th>
+												<th>Title</th>
+												<th>Owner Name</th>
+												<th>Owner Mobile</th>
+												<th>No of Reports</th>
+												<th>Actions</th>
+											</tr>
+										</tfoot>
+										<tbody>
+										<c:forEach items="${summaries}" var="summary">
+										
+										<tr>
+												<td>${summary.blog.blogId}</td>
+												<td>${summary.blog.title}</td>
+												<td>${summary.blog.user.firstname} ${summary.blog.user.lastname}</td>
+												<td>${summary.blog.user.mobile}</td>
+												<td>${summary.reportCount}</td>
+												<td><a class="btn btn-primary btn-sm" href="${pageContext.request.contextPath}/admin_blog?id=${summary.blog.blogId}" style="color: white">View</a></td>
+											</tr>
+										
+										</c:forEach>
+											
+											
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
 					</div>
 
 				</div>
@@ -265,9 +278,9 @@
 					<form action="${pageContext.request.contextPath}/report"
 						method="post">
 
-						<input type="hidden" value="<%= id %>" name="user_id">
-						<input type="hidden" value="0" name="blog_id" id="blog_id">
-						
+						<input type="hidden" value="<%=id%>" name="user_id"> <input
+							type="hidden" value="0" name="blog_id" id="blog_id">
+
 						<div class="form-group row">
 							<div class="col-md-12">
 								<textarea class="form-control" placeholder="Content"
